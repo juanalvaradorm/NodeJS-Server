@@ -3,8 +3,17 @@ const app = express()
 const Bcrypt = require('bcrypt');
 const _ = require('underscore');
 const Usuario = require('../Models/Usuario');
+const { CheckToken } = require('../middlewares/authentication');
+const { VerificaAdminRole } = require('../middlewares/authentication');
 
-app.get('/Usuario', function(req, res) {
+app.get('/Usuario', CheckToken, function(req, res) {
+
+
+    // return res.json({
+    //     usuario: req.Usuario,
+    //     nombre: req.Usuario.name,
+    //     email: req.Usuario.email
+    // });
 
     let Desde = req.query.Desde || 0;
     Desde = Number(Desde);
@@ -33,7 +42,7 @@ app.get('/Usuario', function(req, res) {
     });
 });
 
-app.post('/Usuario', (req, res) => {
+app.post('/Usuario', [CheckToken, VerificaAdminRole], (req, res) => {
     let Body = req.body;
 
     let usuario = new Usuario({
@@ -61,20 +70,9 @@ app.post('/Usuario', (req, res) => {
 
     });
 
-    // if (Body.Nombre === undefined) {
-    //     res.status(400).json({
-    //         ok: false,
-    //         message: 'Información faltante'
-    //     });
-    // } else {
-    //     res.json({
-    //         Persona: Body
-    //     });
-    // }
-
 });
 
-app.put('/Usuario/:Id', (req, res) => {
+app.put('/Usuario/:Id', [CheckToken, VerificaAdminRole], (req, res) => {
 
     let Id = req.params.Id;
     let Body = _.pick(req.body, ['name', 'edad', 'email', 'img', 'role', 'status']);
@@ -95,7 +93,7 @@ app.put('/Usuario/:Id', (req, res) => {
 
 });
 
-app.delete('/Usuario/:Id', (req, res) => {
+app.delete('/Usuario/:Id', [CheckToken, VerificaAdminRole], (req, res) => {
     let Id = req.params.Id;
 
     //Usuario.findByIdAndRemove(Id, (err, UsuarioBorrado) => { Borrar de la BD
