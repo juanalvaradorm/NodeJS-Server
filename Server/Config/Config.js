@@ -43,3 +43,8 @@ process.env.EndToken = 60 * 60 * 40
 ///==================================================
 
 process.env.SeedAuth = process.env.SeedAuth || "este-es-el-seed-desarrollo";
+
+///==================================================
+///Google Client Id
+///==================================================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '952597661766-vo181rl60nhe7as79t33i3gag0rgoh1n.apps.googleusercontent.com';
