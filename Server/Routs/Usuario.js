@@ -29,15 +29,13 @@ app.get('/Usuario', CheckToken, function(req, res) {
             });
         }
 
-        Usuario.count({ status: true }, (err, Count) => {
+        Usuario.estimatedDocumentCount({ status: true }, (err, Count) => {
             res.json({
                 ok: true,
                 usuarios: UsuariosBD,
                 Total: Count
             });
         });
-
-
 
     });
 });

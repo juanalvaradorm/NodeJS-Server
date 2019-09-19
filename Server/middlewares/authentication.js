@@ -37,7 +37,6 @@ let VerificaAdminRole = (req, res, next) => {
             }
         });
     }
-
 }
 
 module.exports = {
