@@ -15,7 +15,7 @@ let CategorySchema = new Schema({
         required: [true, 'Estatus Obligatorio'],
         default: true
     },
-    UserAdd: {
+    UserAddId: {
         type: Schema.Types.ObjectId,
         ref: 'Usuarios',
         required: [true, 'Usuario Obligatorio'],
@@ -48,7 +48,7 @@ let CategorySchema = new Schema({
 CategorySchema.methods.toJSON = function() {
     let Category = this;
     let CategoryObject = Category.toObject();
-    delete CategoryObject.UserAdd;
+    delete CategoryObject.UserAddId;
     delete CategoryObject.DateAdd;
     delete CategoryObject.UserModify;
     delete CategoryObject.DateModify;

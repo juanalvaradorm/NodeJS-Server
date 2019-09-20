@@ -40,7 +40,7 @@ app.get('/Usuario', CheckToken, function(req, res) {
     });
 });
 
-app.post('/Usuario', [CheckToken, VerificaAdminRole], (req, res) => {
+app.post('/Usuario', [CheckToken], (req, res) => {
     let Body = req.body;
 
     let usuario = new Usuario({
