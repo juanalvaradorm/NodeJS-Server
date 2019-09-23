@@ -4,9 +4,6 @@ var JWT = require('jsonwebtoken');
 ///==================================================
 ///Verificar Token
 ///==================================================
-
-
-
 let CheckToken = (req, res, next) => {
     let Token = req.get('authentication');
 
@@ -21,6 +18,30 @@ let CheckToken = (req, res, next) => {
         next();
     });
 }
+
+///==================================================
+///Verificar Token para IMG
+///==================================================
+let CheckTokenIMG = (req, res, next) => {
+
+    let Token = req.query.Token;
+
+    JWT.verify(Token, process.env.SeedAuth, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err
+            })
+        }
+        req.Usuario = decoded.Usuario;
+        next();
+    });
+
+    // res.json({
+    //     Token
+    // });
+
+};
 
 
 ///==================================================
@@ -41,5 +62,6 @@ let VerificaAdminRole = (req, res, next) => {
 
 module.exports = {
     CheckToken,
-    VerificaAdminRole
+    VerificaAdminRole,
+    CheckTokenIMG
 }
