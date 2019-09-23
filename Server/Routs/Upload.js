@@ -71,7 +71,7 @@ App.put('/Upload/:Type/:Id', function(req, res) {
             });
         }
 
-        if (Id === 1) {
+        if (Id === "1") {
             ImageUser(Id, res, FileName);
         } else {
             ImageItems(Id, res, FileName);
